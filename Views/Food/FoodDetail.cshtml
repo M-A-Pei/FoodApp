@@ -1,0 +1,14 @@
+@model FoodModel
+
+@{
+    ViewData["Title"] = "About " + Model.Name;
+}
+
+<div class="text-center">
+    <div class="border border-dark w-100 border-rounded">
+        <h2>Name: @Model.Name</h2>
+        <p>price: @Model.Price</p>
+        <p>description: @Model.Description</p>
+        
+    </div>
+</div>

@@ -104,3 +104,4 @@ C:\syafii\FoodApp\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\syafii\FoodApp\obj\Debug\net9.0\FoodApp.csproj.Up2Date
 C:\syafii\FoodApp\bin\Debug\net9.0\Humanizer.dll
 C:\syafii\FoodApp\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\syafii\FoodApp\obj\Debug\net9.0\FoodApp.sourcelink.json

@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Add Food Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">add Food</h1>
+    <form asp-action="CreateFood" asp-controller="Food">
+        <label for="">name</label><input name="name" type="text"></p>
+        <label for="">description</label><input name="description" type="text"></p>
+        <label for="">image</label><input name="image" type="text"></p>
+        <label for="">price</label><input name="price" type="number"></p>
+        <button type="submit">add</button>
+    </form>
+</div>

@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Food Page";
+}
+
+@model List<FoodModel>
+
+<div class="text-center">
+    <h1 class="display-4">Available Foods</h1>
+    <a asp-controller="food" asp-action="AddFood">add food</a>
+    <table border="1" class="w-100">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>price</th>
+                <th>description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var food in Model){
+                <tr>
+                    <td>@food.Name</td>
+                    <td>@food.Price</td>
+                    <td>@food.Description</td>
+                    <td>
+                        <form method="post" class="d-inline">
+                            <button asp-controller="food" asp-action="DeleteFood" asp-route-id="@food.Id">delete</button>
+                        </form>
+                        <form method="post" class="d-inline">
+                            <button asp-controller="food" asp-action="FoodDetail" asp-route-id="@food.Id">details</button>
+                        </form>
+                        <button>update</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
