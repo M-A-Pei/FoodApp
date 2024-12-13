@@ -24,6 +24,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZFxBZGRGb29kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/syafii/FoodApp/Views/Food/EditFood.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZFxFZGl0Rm9vZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/syafii/FoodApp/Views/Food/FoodDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZFxGb29kRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
