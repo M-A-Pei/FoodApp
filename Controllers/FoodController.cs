@@ -22,7 +22,12 @@ public class FoodController:Controller{
 
     public IActionResult FoodDetail(int id){
         FoodModel food = _context.Foods.Find(id);
-        return View("FoodDetail", food);
+        return View(food);
+    }
+
+    public IActionResult EditFood(int id){
+        FoodModel food = _context.Foods.Find(id);
+        return View(food);
     }
     
     [HttpPost]
@@ -42,5 +47,15 @@ public class FoodController:Controller{
         _context.Foods.Remove(food);
         await _context.SaveChangesAsync();
         return RedirectToAction("List");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateFood(FoodModel food){
+        if(ModelState.IsValid){
+            _context.Foods.Update(food);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("List");
+        }
+        return View("List");
     }
 }

@@ -29,7 +29,9 @@
                         <form method="post" class="d-inline">
                             <button asp-controller="food" asp-action="FoodDetail" asp-route-id="@food.Id">details</button>
                         </form>
-                        <button>update</button>
+                        <form method="post" class="d-inline">
+                            <button asp-controller="food" asp-action="EditFood" asp-route-id="@food.Id">update</button>
+                        </form>
                     </td>
                 </tr>
             }
