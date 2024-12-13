@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql; // Use this for Pomelo
 using FoodApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +9,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version("10.4.32"))));
+        new MySqlServerVersion(new Version("10.4.32"))
+    )
+);
+
+builder.Services.Configure<CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings")
+);
+
 
 
 var app = builder.Build();
