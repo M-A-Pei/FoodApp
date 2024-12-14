@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FoodApp.Data;
+using FoodApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.Configure<CloudinarySettings>(
     builder.Configuration.GetSection("CloudinarySettings")
 );
+
+builder.Services.AddTransient<IUploadService, UploadService>();
 
 
 

@@ -4,10 +4,11 @@ using FoodApp.Data;
 using Microsoft.Extensions.Options;
 
 namespace FoodApp.Services{
-    interface IUploadService{
+    public interface IUploadService{
         Task<string?> UploadFileAsync(IFormFile file);
     }
-    public class UploadService{
+
+    public class UploadService: IUploadService{
         private readonly Cloudinary _cloudinary;
         public UploadService(IOptions<CloudinarySettings> x)
         {
