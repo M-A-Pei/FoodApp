@@ -30,7 +30,7 @@ namespace FoodApp.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("longtext")
-                        .HasColumnName("image");
+                        .HasColumnName("Image");
 
                     b.Property<string>("Name")
                         .IsRequired()

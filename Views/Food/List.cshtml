@@ -17,24 +17,35 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var food in Model){
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var food in Model)
+                {
+                    <tr>
+                        <td>@food.Name</td>
+                        <td>@food.Price</td>
+                        <td>@food.Description</td>
+                        <td>
+                            <form method="post" class="d-inline">
+                                <button asp-controller="food" asp-action="DeleteFood" asp-route-id="@food.Id">delete</button>
+                            </form>
+                            <form method="post" class="d-inline">
+                                <button asp-controller="food" asp-action="FoodDetail" asp-route-id="@food.Id">details</button>
+                            </form>
+                            <form method="post" class="d-inline">
+                                <button asp-controller="food" asp-action="EditFood" asp-route-id="@food.Id">update</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
                 <tr>
-                    <td>@food.Name</td>
-                    <td>@food.Price</td>
-                    <td>@food.Description</td>
-                    <td>
-                        <form method="post" class="d-inline">
-                            <button asp-controller="food" asp-action="DeleteFood" asp-route-id="@food.Id">delete</button>
-                        </form>
-                        <form method="post" class="d-inline">
-                            <button asp-controller="food" asp-action="FoodDetail" asp-route-id="@food.Id">details</button>
-                        </form>
-                        <form method="post" class="d-inline">
-                            <button asp-controller="food" asp-action="EditFood" asp-route-id="@food.Id">update</button>
-                        </form>
-                    </td>
+                    <td colspan="4">No food items available.</td>
                 </tr>
             }
+
         </tbody>
     </table>
 </div>

@@ -24,7 +24,8 @@ namespace FoodApp.Services{
             using var stream = file.OpenReadStream(); // Convert the file to a stream.
             var uploadParams = new ImageUploadParams
             {
-                File = new FileDescription(file.FileName, stream) // Describe the file for upload.
+                File = new FileDescription(file.FileName, stream), // Describe the file for upload.
+                Folder = "FoodApp"
             };
 
             // Upload the file to Cloudinary and get the result.

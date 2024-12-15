@@ -4,11 +4,11 @@
 
 <div class="text-center">
     <h1 class="display-4">add Food</h1>
-    <form asp-action="CreateFood" asp-controller="Food">
-        <label for="">name</label><input name="name" type="text"></p>
-        <label for="">description</label><input name="description" type="text"></p>
-        <label for="">image</label><input name="image" type="text"></p>
-        <label for="">price</label><input name="price" type="number"></p>
+    <form asp-action="CreateFood" asp-controller="Food" enctype="multipart/form-data">
+        <label for="">name</label><input name="Name" type="text"></p>
+        <label for="">description</label><input name="Description" type="text"></p>
+        <label for="">image</label><input name="Image" type="file" accept=".png, .jpg, .jpeg"></p>
+        <label for="">price</label><input name="Price" type="number"></p>
         <button type="submit">add</button>
     </form>
 </div>

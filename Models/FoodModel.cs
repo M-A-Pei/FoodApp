@@ -8,6 +8,7 @@ namespace FoodApp.Models
         public int Id { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
+        [Column("Image")]
         public string? ImageUrl { get; set; }
         [NotMapped]
         public required IFormFile Image { get; set; }
