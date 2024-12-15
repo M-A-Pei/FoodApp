@@ -12,6 +12,7 @@ namespace FoodApp.Models
         public string? ImageUrl { get; set; }
         [NotMapped]
         public required IFormFile Image { get; set; }
+        public string? ImagePublicId { get; set; }
         public required int Price { get; set; }
     }
 }

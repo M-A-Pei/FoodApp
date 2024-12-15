@@ -5,7 +5,8 @@ using Microsoft.Extensions.Options;
 
 namespace FoodApp.Services{
     public interface IUploadService{
-        Task<string?> UploadFileAsync(IFormFile file);
+        Task<(string? url, string? publicId)> UploadFileAsync(IFormFile file);
+        Task<bool> DeleteFileAsync(string publicId);
     }
 
     public class UploadService: IUploadService{
@@ -17,9 +18,9 @@ namespace FoodApp.Services{
             );
         }
 
-         public async Task<string?> UploadFileAsync(IFormFile file){
+        public async Task<(string? url, string? publicId)> UploadFileAsync(IFormFile file){
             if (file.Length <= 0)
-                return null; // Early exit for invalid files.
+                return (null, null);
 
             using var stream = file.OpenReadStream(); // Convert the file to a stream.
             var uploadParams = new ImageUploadParams
@@ -31,8 +32,19 @@ namespace FoodApp.Services{
             // Upload the file to Cloudinary and get the result.
             var uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
+            if(uploadResult == null)
+                return (null, null);
+
             // Return the secure URL for public access.
-            return uploadResult?.SecureUrl?.ToString();
+            return(uploadResult?.SecureUrl?.ToString(), uploadResult?.PublicId);
+        }
+
+        public async Task<bool> DeleteFileAsync(string publicId){
+            if(string.IsNullOrEmpty(publicId))
+                return false;
+            var deleteParams = new DeletionParams(publicId);
+            var result = await _cloudinary.DestroyAsync(deleteParams);
+            return result.Result == "ok";
         }
 
     }

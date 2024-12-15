@@ -6,12 +6,12 @@
 
 <div class="text-center">
     <h1 class="display-4">edit @Model.Name</h1>
-    <form asp-action="UpdateFood" asp-controller="Food" method="post">
+    <form asp-action="UpdateFood" asp-controller="Food" method="post" enctype="multipart/form-data">
         <input type="hidden" name="Id" value="@Model.Id">
-        <label for="">name</label><input name="name" type="text" value="@Model.Name"></p>
-        <label for="">description</label><input name="description" value="@Model.Description" type="text"></p>
-        <label for="">image</label><input name="image" value="@Model.Image" type="text"></p>
-        <label for="">price</label><input name="price" value="@Model.Price" type="number"></p>
+        <label for="">name</label><input name="Name" type="text" value="@Model.Name"></p>
+        <label for="">description</label><input name="Description" value="@Model.Description" type="text"></p>
+        <label for="">image</label><input name="Image" type="file" accept=".png, .jpg, .jpeg"></p>
+        <label for="">price</label><input name="Price" value="@Model.Price" type="number"></p>
         <button type="submit">update</button>
     </form>
 </div>

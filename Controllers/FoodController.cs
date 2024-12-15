@@ -37,40 +37,45 @@ public class FoodController:Controller{
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateFood(FoodModel food){
-        Console.WriteLine(food.Image);
+    public async Task<IActionResult> CreateFood(FoodModel food){ //bind the request body to fit the FoodModel
 
-        if (food.Image == null || food.Image.Length == 0)
+        if (food.Image == null || food.Image.Length == 0) //check image serperatly from rest of model
         {
            ModelState.AddModelError("Image", "The Image field is required.");
            return BadRequest("upload image is required");
         }
 
-        if(ModelState.IsValid){
-            var url = await _uploadService.UploadFileAsync(food.Image);
-            if(url == null){
-                Console.WriteLine("upload failed yooooooooooooo");
+        if(ModelState.IsValid){ //check if the rest of the model is valid
+
+            var response = await _uploadService.UploadFileAsync(food.Image); //upoad the image then get the url and publicId, using the UploadService previously created
+            string? url = response.url;
+            string? publicId = response.publicId;
+            if(url == null || publicId == null){
                 return BadRequest("failed to upload image");
             }
-            Console.WriteLine("upload success yooooooooooooo");
+            food.ImagePublicId = publicId;
             food.ImageUrl = url;
             _context.Foods.Add(food);
             await _context.SaveChangesAsync();
             return RedirectToAction("List");
             
         }
+
         foreach (var error in ModelState.Values.SelectMany(v => v.Errors)){
                 Console.WriteLine(error.ErrorMessage);
         }
-        Console.WriteLine("model isnt valid yooooooooooooo");
         return View("List");
     }
 
     [HttpPost]
     public async Task<IActionResult> DeleteFood(int id){
         FoodModel? food = await _context.Foods.FindAsync(id);
-        if(food != null){
+        if(food != null && food.ImagePublicId != null){
             _context.Foods.Remove(food);
+            bool res = await _uploadService.DeleteFileAsync(food.ImagePublicId);
+            if(!res){ 
+                return BadRequest("failed to delete image");                
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction("List");
         }
@@ -80,8 +85,33 @@ public class FoodController:Controller{
 
     [HttpPost]
     public async Task<IActionResult> UpdateFood(FoodModel food){
-        if(ModelState.IsValid){
-            _context.Foods.Update(food);
+        var existingFood = await _context.Foods.FindAsync(food.Id);
+        if(existingFood != null){
+            existingFood.Name = food.Name;
+            existingFood.Description = food.Description;
+            existingFood.Price = food.Price;
+            Console.WriteLine("updating data");       
+
+            if (food.Image != null && existingFood.ImagePublicId != null)
+            {
+                Console.WriteLine("uploading image");
+                await _uploadService.DeleteFileAsync(existingFood.ImagePublicId);
+                var response = await _uploadService.UploadFileAsync(food.Image);
+                string? url = response.url;
+                string? publicId = response.publicId;
+                if (url == null || publicId == null)
+                {
+                    return BadRequest("failed to upload image");
+                }
+                existingFood.ImagePublicId = publicId;
+                existingFood.ImageUrl = url;
+            }else
+            {
+                Console.WriteLine("not uploading image");
+                Console.WriteLine(existingFood.ImagePublicId);
+                Console.WriteLine(food.Image);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction("List");
         }
