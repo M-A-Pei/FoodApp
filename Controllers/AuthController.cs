@@ -33,7 +33,7 @@ public class AuthController:Controller{
         return BadRequest("failed to make user, model isnt valid");
     }
 
-    public async Task<IActionResult> LoginLogic(Login login){
+    public IActionResult LoginLogic(Login login){
         if(ModelState.IsValid){
 
         }
