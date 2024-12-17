@@ -4,14 +4,16 @@
     ViewData["Title"] = "edit " + Model.Name;
 }
 
-<div class="text-center">
-    <h1 class="display-4">edit @Model.Name</h1>
-    <form asp-action="UpdateFood" asp-controller="Food" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="Id" value="@Model.Id">
-        <label for="">name</label><input name="Name" type="text" value="@Model.Name"></p>
-        <label for="">description</label><input name="Description" value="@Model.Description" type="text"></p>
-        <label for="">image</label><input name="Image" type="file" accept=".png, .jpg, .jpeg"></p>
-        <label for="">price</label><input name="Price" value="@Model.Price" type="number"></p>
-        <button type="submit">update</button>
-    </form>
+<div class="d-flex justify-content-center row">
+    <div class="col-lg-6 border border-rounded p-2">
+        <h1 class="display-4">edit @Model.Name</h1>
+        <form class="d-flex flex-column gap-2" asp-action="UpdateFood" asp-controller="Food" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="Id" value="@Model.Id">
+            <label for="">name</label><input name="Name" type="text" value="@Model.Name" class="w-100">
+            <label for="">description</label><input name="Description" value="@Model.Description" type="text" class="w-100">
+            <label for="">image</label><input name="Image" type="file" accept=".png, .jpg, .jpeg" class="w-100">
+            <label for="">price</label><input name="Price" value="@Model.Price" type="number" class="w-100">
+            <button type="submit" class="btn btn-warning">update</button>
+        </form>
+    </div>
 </div>

@@ -2,13 +2,15 @@
     ViewData["Title"] = "Add Food Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">add Food</h1>
-    <form asp-action="CreateFood" asp-controller="Food" enctype="multipart/form-data">
-        <label for="">name</label><input name="Name" type="text"></p>
-        <label for="">description</label><input name="Description" type="text"></p>
-        <label for="">image</label><input name="Image" type="file" accept=".png, .jpg, .jpeg"></p>
-        <label for="">price</label><input name="Price" type="number"></p>
-        <button type="submit">add</button>
-    </form>
+<div class="row d-flex justify-content-center">
+    <div class="col-lg-6 p-2 border border-rounded">
+        <h1 class="display-4">add Food</h1>
+        <form class="d-flex flex-column gap-2" asp-action="CreateFood" asp-controller="Food" enctype="multipart/form-data">
+            <label for="">name</label><input name="Name" type="text" class="w-100">
+            <label for="">description</label><input name="Description" type="text" class="w-100">
+            <label for="">image</label><input name="Image" type="file" accept=".png, .jpg, .jpeg" class="w-100">
+            <label for="">price</label><input name="Price" type="number" class="w-100">
+            <button type="submit" class="btn btn-success">add</button>
+        </form>
+    </div>
 </div>

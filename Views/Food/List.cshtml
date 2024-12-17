@@ -6,8 +6,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Available Foods</h1>
-    <a asp-controller="food" asp-action="AddFood">add food</a>
-    <table border="1" class="w-100">
+    <a asp-controller="food" asp-action="AddFood" class="btn btn-success mb-3">add food</a>
+    <table border="1" class="w-100 table">
         <thead>
             <tr>
                 <th>name</th>
@@ -27,13 +27,13 @@
                         <td>@food.Description</td>
                         <td>
                             <form method="post" class="d-inline">
-                                <button asp-controller="food" asp-action="DeleteFood" asp-route-id="@food.Id">delete</button>
+                                <button class="btn btn-danger" asp-controller="food" asp-action="DeleteFood" asp-route-id="@food.Id">delete</button>
                             </form>
                             <form method="post" class="d-inline">
-                                <button asp-controller="food" asp-action="FoodDetail" asp-route-id="@food.Id">details</button>
+                                <button class="btn btn-primary" asp-controller="food" asp-action="FoodDetail" asp-route-id="@food.Id">details</button>
                             </form>
                             <form method="post" class="d-inline">
-                                <button asp-controller="food" asp-action="EditFood" asp-route-id="@food.Id">update</button>
+                                <button class="btn btn-warning" asp-controller="food" asp-action="EditFood" asp-route-id="@food.Id">update</button>
                             </form>
                         </td>
                     </tr>

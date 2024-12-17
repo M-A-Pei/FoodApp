@@ -12,5 +12,6 @@ namespace FoodApp.Data
 
         // Define your database tables here using DbSet<T>
         public required DbSet<FoodModel> Foods { get; set; }
+        public required DbSet<UserModel> Users { get; set; }
     }
 }
