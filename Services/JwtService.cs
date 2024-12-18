@@ -18,13 +18,12 @@ public class JwtService
         _audience = audience;
     }
 
-    public string GenerateToken(string userId, string username)
+    public string GenerateToken(string userId)
     {
         // Define the claims for the token (can include custom claims)
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId),
-            new Claim(JwtRegisteredClaimNames.UniqueName, username),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Unique token ID
         };
 

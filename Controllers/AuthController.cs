@@ -11,14 +11,17 @@ public class AuthController:Controller{
         _context = context;
     }
     
+    [HttpGet("Login")]
     public IActionResult Login(){
         return View();
     }
 
+    [HttpGet("Register")]
     public IActionResult Register(){
         return View();
     }
 
+    [HttpPost("Register")]
     public async Task<IActionResult> AddUser(CreateUser user){
         if(ModelState.IsValid){
             UserModel data = new UserModel{
@@ -33,6 +36,7 @@ public class AuthController:Controller{
         return BadRequest("failed to make user, model isnt valid");
     }
 
+    [HttpPost("Login")]
     public IActionResult LoginLogic(Login login){
         if(ModelState.IsValid){
 
