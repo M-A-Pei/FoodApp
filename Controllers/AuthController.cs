@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FoodApp.Data;
 using FoodApp.Models;
+using FoodApp.DTO.User;
 
 namespace FoodApp.Controllers;
 
@@ -18,12 +19,24 @@ public class AuthController:Controller{
         return View();
     }
 
-    public async Task<IActionResult> AddUser(UserModel user){
+    public async Task<IActionResult> AddUser(CreateUser user){
         if(ModelState.IsValid){
-            _context.Users.Add(user);
+            UserModel data = new UserModel{
+                name = user.name,
+                email = user.email,
+                password = user.password 
+            };
+            _context.Users.Add(data);
             await _context.SaveChangesAsync();
             return RedirectToAction("Login");
         }
         return BadRequest("failed to make user, model isnt valid");
+    }
+
+    public async Task<IActionResult> LoginLogic(Login login){
+        if(ModelState.IsValid){
+
+        }
+        return RedirectToAction("Login");
     }
 }
