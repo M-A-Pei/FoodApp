@@ -1,30 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
 using FoodApp.Data;
 using FoodApp.Models;
+using FoodApp.Services;
 
 namespace FoodApp.Controllers;
 
 public class UserController:Controller{
+    private readonly UserService _userService;
     private readonly ApplicationDbContext _context;
-    public UserController(ApplicationDbContext context){
+    public UserController(ApplicationDbContext context, UserService userService){
+        _userService = userService;
         _context = context;
     }
 
     [HttpGet]
     public UserModel? GetUser(int id){
-       UserModel? user = _context.Users.Find(id);
-       return user;
+       return _userService.GetUser(id);
     }
 
     [HttpGet]
     public List<UserModel> FindUsers(){
-        List<UserModel> res = _context.Users.ToList();
-        return res;
+        return _userService.FindUsers();
     }
 
     [HttpGet]
     public UserModel? GetUserByEmail(string email){
-        UserModel? res = _context.Users.SingleOrDefault(u => u.email == email);
-        return res;
+        return _userService.GetUserByEmail(email);
     }
 }

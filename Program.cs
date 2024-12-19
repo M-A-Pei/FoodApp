@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     )
 );
 
+builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -31,6 +32,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "YourSuperSecureKey12345!")
             )
+        };
+
+         // Specify that the token should come from the cookie (not the Authorization header)
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var cookie = context.Request.Cookies["jwt"];
+                if (!string.IsNullOrEmpty(cookie))
+                {
+                    context.Token = cookie;
+                }
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -47,8 +62,7 @@ var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "localhost";
 builder.Services.AddSingleton(new JwtService(jwtKey, jwtIssuer, jwtAudience));
 
 builder.Services.AddTransient<IUploadService, UploadService>();
-
-
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
@@ -61,7 +75,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseAuthorization();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
