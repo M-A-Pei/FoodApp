@@ -41,6 +41,6 @@ public class AuthController:Controller{
         if(ModelState.IsValid){
 
         }
-        return RedirectToAction("Login");
+        return BadRequest("incorrect form data");
     }
 }
